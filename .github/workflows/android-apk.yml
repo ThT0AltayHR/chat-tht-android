@@ -30,9 +30,8 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Create dummy google-services.json
+      - name: Create google-services.json
         run: |
-          cp app/google-services.json.example app/google-services.json || \
           cat > app/google-services.json << 'GEOF'
           {
             "project_info": {
@@ -43,9 +42,22 @@ jobs:
             "client": [
               {
                 "client_info": {
-                  "mobilesdk_app_id": "1:000000000000:android:0000000000000000",
+                  "mobilesdk_app_id": "1:000000000000:android:0000000000000001",
                   "android_client_info": {
                     "package_name": "com.turkhackteam.org"
+                  }
+                },
+                "oauth_client": [],
+                "api_key": [{ "current_key": "placeholder" }],
+                "services": {
+                  "appinvite_service": { "other_platform_oauth_client": [] }
+                }
+              },
+              {
+                "client_info": {
+                  "mobilesdk_app_id": "1:000000000000:android:0000000000000002",
+                  "android_client_info": {
+                    "package_name": "com.turkhackteam.org.debug"
                   }
                 },
                 "oauth_client": [],
@@ -59,7 +71,7 @@ jobs:
           }
           GEOF
 
-      - name: Create dummy stoatbuild.properties
+      - name: Create stoatbuild.properties
         run: |
           cat > stoatbuild.properties << 'EOF'
           sentry.dsn=
@@ -75,12 +87,12 @@ jobs:
         run: |
           VERSION=$(grep 'versionName' app/build.gradle.kts | head -1 | sed 's/.*versionName = "\(.*\)".*/\1/')
           echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "tag=v${VERSION}-build-$(date +%Y%m%d%H%M)" >> $GITHUB_OUTPUT
+          echo "tag=v${VERSION}-$(date +%Y%m%d%H%M)" >> $GITHUB_OUTPUT
 
       - name: Rename APK
         run: |
           mv app/build/outputs/apk/debug/app-debug.apk \
-             app/build/outputs/apk/debug/ChatTHT-v${{ steps.version.outputs.version }}.apk
+             "app/build/outputs/apk/debug/ChatTHT-v${{ steps.version.outputs.version }}.apk"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -93,9 +105,10 @@ jobs:
             TurkHackTeam topluluğu için Revolt tabanlı sohbet uygulaması.
 
             ### İndirme
-            Aşağıdaki **Assets** bölümünden APK dosyasını indirin.
+            Aşağıdaki **Assets** bölümünden `ChatTHT-vX.X.X.apk` dosyasını indirin.
 
-            > Geliştirici: **AltayHR** | Topluluk: [turkhackteam.org](https://www.turkhackteam.org)
+            ---
+            > Geliştirici: **AltayHR** | Topluluk: [turkhackteam.org](https://www.turkhackteam.org) | [thtakademi.com.tr](https://thtakademi.com.tr)
           files: app/build/outputs/apk/debug/ChatTHT-v${{ steps.version.outputs.version }}.apk
           draft: false
           prerelease: false
