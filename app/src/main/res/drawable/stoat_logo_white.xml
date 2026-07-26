@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Chat THT logo for white-on-transparent contexts (login/splash screens) -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="280dp"
+    android:height="120dp"
+    android:viewportWidth="280"
+    android:viewportHeight="120">
+
+  <!-- T (left) -->
+  <path
+      android:pathData="M10,20 L80,20 L80,36 L52,36 L52,100 L38,100 L38,36 L10,36 Z"
+      android:fillColor="#FFFFFF"/>
+
+  <!-- H -->
+  <path
+      android:pathData="M90,20 L104,20 L104,52 L136,52 L136,20 L150,20 L150,100 L136,100 L136,66 L104,66 L104,100 L90,100 Z"
+      android:fillColor="#FFFFFF"/>
+
+  <!-- T (right) -->
+  <path
+      android:pathData="M162,20 L232,20 L232,36 L204,36 L204,100 L190,100 L190,36 L162,36 Z"
+      android:fillColor="#FFFFFF"/>
+
+  <!-- red dot accent -->
+  <path
+      android:pathData="M248,75 A12,12 0 1,0 248,74.99Z"
+      android:fillColor="#D32020"/>
+</vector>
